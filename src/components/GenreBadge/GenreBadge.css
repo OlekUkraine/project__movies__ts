@@ -1,0 +1,21 @@
+
+.GenreBadge {
+    width: 100%;
+    height: 0;
+
+    overflow: hidden;
+
+    background-color: var(--primary-bg-color);
+
+    animation: genre-page 2s ease-out forwards;
+    animation-delay: .8s;
+}
+
+@keyframes genre-page {
+    0%{
+        height: 1vh;
+    }
+    100%{
+        height: 75vh;
+    }
+}

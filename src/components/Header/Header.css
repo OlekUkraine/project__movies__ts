@@ -1,0 +1,113 @@
+.light {
+    --primary-color: #25354F;
+    --primary-bg-color: rgba(191, 199, 198, 0.2);
+    --primary-to-drop-color: rgba(191, 199, 198, 0.9);
+    --primary-text-color: #25354F;
+    --primary-shadow-color: #544f4f;
+    --primary-bg-image: url("../../images/backgraunds/light_2.jpg");
+
+    transition: 1.5s;
+}
+
+.dark {
+    --primary-color: rgba(217, 214, 214, 0.87);
+    --primary-bg-color: rgba(37, 53, 79, 0.16);
+    --primary-to-drop-color: rgba(37, 53, 79, 0.9);
+    --primary-text-color: #BFC7C6;
+    --primary-shadow-color: rgba(217, 214, 214, 0.87);
+    --primary-bg-image: url("../../images/backgraunds/night_3.jpg");
+
+    transition: 1.5s;
+}
+
+.Header {
+    width: calc(100% - 20px);
+    height: 100px;
+    margin: 10px;
+    padding: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: var(--primary-text-color);
+    background-color: var(--primary-bg-color);
+    box-shadow:  0 -5px 6px var(--primary-shadow-color);
+    opacity: .9;
+
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.Header>div {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Header__nav {
+    justify-content: flex-end;
+}
+
+.Header input {
+    padding: 3px;
+
+    font-weight: bold;
+    font-style: italic;
+    opacity: .4;
+
+    border: none;
+    border-radius: 4px;
+}
+
+.Header input:hover,
+.Header input:focus {
+    opacity: .7;
+
+    transform: scale(1.07);
+
+    box-shadow:  3px 3px 4px var(--primary-shadow-color);
+}
+
+.Header form button {
+    margin-left: 15px;
+    padding: 3px;
+
+    opacity: .4;
+
+    border: none;
+    border-radius: 4px;
+}
+
+.Header form button:hover {
+    opacity: .8;
+
+    transform: scale(1.07);
+
+    box-shadow:  3px 3px 4px var(--primary-shadow-color);
+}
+
+.Header form button:active {
+    opacity: .8;
+
+    transform: scale(0.96);
+
+    box-shadow:  1px 1px 4px var(--primary-shadow-color);
+}
+
+.Header a {
+    margin: 15px;
+    padding: 10px;
+
+    font-size: 22px;
+    text-decoration: none;
+    color: var(--primary-text-color);
+}
+
+.Header a.active {
+    text-shadow: 0 0 18px var(--primary-bg-color);
+}
+
+.Header__logo>a.active {
+    font-size: 28px;
+    text-shadow: none;
+}

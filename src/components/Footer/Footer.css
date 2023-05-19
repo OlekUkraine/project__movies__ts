@@ -1,0 +1,42 @@
+.Footer {
+    width: calc(100% - 20px);
+    height: 100px;
+    margin: 10px;
+    padding: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: var(--primary-text-color);
+    background-color: var(--primary-bg-color);
+    box-shadow: 0 -5px 8px var(--primary-shadow-color);
+    opacity: .7;
+
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.Footer div {
+    font-size: 16px;
+
+    animation: heart ease-out 1s infinite;
+}
+
+
+@keyframes heart {
+    0% {
+        font-size: 16px;
+    }
+    30% {
+        font-size: 22px;
+    }
+    100% {
+        font-size: 16px;
+    }
+}
+
+
+.Footer div {
+    font-size: 16px;
+}

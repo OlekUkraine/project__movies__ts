@@ -1,0 +1,17 @@
+
+.MainLayout {
+    width: calc(100% - 30px);
+    min-height: 100vh;
+    min-width: 850px;
+
+    background-image: var(--primary-bg-image);
+    background-color: var(--primary-bg-color);
+    box-shadow: inset 2px 2px 2px var(--primary-shadow-color), inset -2px -2px 2px var(--primary-bg-color);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+
+    box-sizing: border-box;
+
+    border-radius: 8px;
+}

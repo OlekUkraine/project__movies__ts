@@ -1,0 +1,80 @@
+
+a {
+    text-decoration: none;
+    color: var(--primary-text-color);
+}
+
+.MoviesListCard {
+    width: 100px;
+    height: 200px;
+    margin: 4em;
+    padding: 8px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(255, 255, 255, 0.02));
+    box-shadow:  0 -5px 5px var(--primary-shadow-color);
+
+    opacity: 0;
+
+    border-radius: 9px;
+
+    animation: fade-in .5s ease-in-out forwards;
+}
+
+.MoviesListCard>a {
+    height: 85%;
+    display: block;
+}
+
+.MoviesListCard img {
+    width: 100%;
+
+    object-fit: cover;
+
+    border-radius: 6px;
+}
+
+.MoviesListCard__title {
+    min-height: 50px;
+    margin: 10px;
+
+    font-size: .3em;
+
+    text-align: center;
+    color: var(--primary-text-color);
+
+    animation: title-scale .3s forwards;
+    animation-delay: .3s;
+}
+
+@keyframes fade-in {
+    0% {
+        width: 100px;
+        height: 200px;
+        margin: 4em;
+
+        opacity: 0;
+    }
+
+    100% {
+        width: 200px;
+        height: 400px;
+        margin: 20px;
+
+        opacity: 1;
+    }
+}
+
+@keyframes title-scale {
+    0% {
+        font-size: .3em;
+    }
+
+    100% {
+        font-size: 1em;
+    }
+}

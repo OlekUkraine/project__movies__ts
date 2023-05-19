@@ -1,0 +1,113 @@
+.Pagination__wrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: center;
+}
+
+.Pagination {
+    width: 540px;
+    padding: 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+.num {
+    padding: 3px 8px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    color: var(--primary-text-color);
+    background-color: var(--primary-bg-color);
+    box-shadow:  3px 3px 4px var(--primary-shadow-color);
+
+    border:none;
+    border-radius: 5px;
+}
+
+.num:hover {
+    box-sizing: border-box;
+
+    transform: scale(1.07);
+
+    box-shadow:  2px 2px 3px var(--primary-shadow-color);
+}
+
+.num:active {
+    transform: scale(0.93);
+
+    box-shadow:  2px 2px 5px var(--primary-shadow-color);
+}
+
+.Pagination__this-page {
+    cursor: unset;
+
+    font-size: 20px;
+
+    color: var(--primary-text-color);
+    background-color: var(--primary-bg-color);
+    box-shadow:  3px 3px 4px var(--primary-shadow-color);
+
+    opacity: .8;
+
+    border:none;
+}
+
+.Pagination__this-page:hover {
+    transform: scale(1);
+    box-shadow:  3px 3px 4px var(--primary-shadow-color);
+}
+
+.btn {
+    font-size: 20px;
+
+    color: var(--primary-text-color);
+    background-color: var(--primary-bg-color);
+    box-shadow:  2px 2px 3px var(--primary-shadow-color);
+
+    border:none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow:  2px 3px 3px var(--primary-shadow-color);
+}
+
+.btn:active {
+    transform: translateY(2px);
+    box-shadow:  2px 1px 3px var(--primary-shadow-color);
+}
+
+.genres-btn {
+    margin: 10px;
+    padding: 5px 15px;
+
+    color: var(--primary-text-color);
+    box-shadow:  2px 2px 3px var(--primary-shadow-color);
+
+    border-radius: 5px;
+}
+
+.none-num {
+    cursor: unset;
+
+    font-size: 20px;
+    font-weight: bold;
+    transform: none;
+
+    color: var(--primary-text-color);
+    background-color: var(--primary-bg-color);
+    box-shadow:  2px 2px 3px var(--primary-shadow-color);
+
+    border:none;
+    border-radius: 5px;
+}
+
