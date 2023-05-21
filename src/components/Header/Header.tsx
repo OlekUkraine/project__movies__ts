@@ -7,12 +7,13 @@ import logo from '../../images/logo/logo.jpg';
 import {ToggleTheme} from "../ToggleTheme";
 import {findActions} from "../../redux";
 import {IFormData} from "../../types";
-import './Header.css';
 import {UserInfo} from "../UserInfo";
+import './Header.css';
 
 
 const Header: FC = () => {
     const theme = useAppSelector(state => state.themeReducer.value);
+    const {trigger} = useAppSelector(state => state.findMoviesReducer);
     const {register, handleSubmit, reset, formState: {isValid}} = useForm<IFormData>({mode: 'all'});
     const dispatch = useAppDispatch()
 
@@ -20,6 +21,7 @@ const Header: FC = () => {
         if (title === '') {
             dispatch(findActions.delName());
         }
+        dispatch(findActions.togglePage(1));
         dispatch(findActions.delGenres());
         dispatch(findActions.addName(title));
         reset()
@@ -52,7 +54,7 @@ const Header: FC = () => {
             </div>
 
             <form onSubmit={handleSubmit(findMovies)}>
-                <input type="text" placeholder={'name'} {...register('title', {required: true})}/>
+                <input disabled={!trigger} type="text" placeholder={'name'} {...register('title', {required: true})}/>
                 <button hidden={!isValid}>search</button>
             </form>
 

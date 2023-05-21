@@ -120,6 +120,28 @@
     border-radius: 5px;
 }
 
+.info-genre-btn {
+    margin: 8px;
+    padding: 5px;
+
+    color: var(--primary-text-color);
+    background-color: var(--primary-bg-color);
+    box-shadow: 0 -3px 4px var(--primary-shadow-color);
+
+    border: none;
+    border-radius: 5px;
+}
+
+.info-genre-btn:hover {
+    box-shadow: 0 -1px 4px var(--primary-shadow-color);
+
+    transform: translateY(-2px);
+}
+
+.info-genre-btn:active {
+    box-shadow: 0 2px 4px var(--primary-shadow-color);
+}
+
 .all-info__description {
     padding: 20px;
 

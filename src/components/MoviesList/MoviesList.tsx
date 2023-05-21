@@ -15,6 +15,7 @@ const MoviesList: FC = () => {
 
     useEffect(() => {
         dispatch(findActions.togglePage(1));
+        dispatch(findActions.trigger(true));
     }, [])
 
 

@@ -6,11 +6,7 @@ import {useAppSelector} from "../hooks";
 import './MoviesPage.css';
 
 
-
-interface IProps {
-}
-
-const MoviesPage: FC<IProps> = () => {
+const MoviesPage: FC = () => {
     const theme = useAppSelector(state => state.themeReducer.value);
 
     return (

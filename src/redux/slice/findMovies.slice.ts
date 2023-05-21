@@ -5,12 +5,14 @@ interface IState {
     page: number
     addGenres: number[];
     addNameMovies: string;
+    trigger: boolean;
 }
 
 const initialState: IState = {
     page: 1,
     addGenres: [],
-    addNameMovies: null
+    addNameMovies: null,
+    trigger: false
 };
 
 
@@ -20,7 +22,6 @@ const slice = createSlice(
         initialState,
         reducers: {
             addGenresToList: (state, action) => {
-                console.log(action.payload)
                 state.addGenres.push(action.payload);
             },
             delGenres: state => {
@@ -28,6 +29,9 @@ const slice = createSlice(
             },
             togglePage: (state, action) => {
                 state.page = action.payload;
+            },
+            trigger: (state, action) => {
+                state.trigger = action.payload;
             },
             addName: (state, action) => {
                 state.addNameMovies = action.payload;

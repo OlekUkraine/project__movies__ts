@@ -6,7 +6,6 @@ import {genreActions, findActions} from "../../redux";
 import {IMovieInit} from "../../types";
 import './GenreBadge.css';
 
-
 const GenreBadge: FC = () => {
     const theme = useAppSelector(state => state.themeReducer.value);
     const [nameArr, setNameArr] = useState<JSX.Element[]>([])
@@ -24,21 +23,18 @@ const GenreBadge: FC = () => {
         dispatch(findActions.delGenres());
         dispatch(findActions.delName());
         dispatch(findActions.togglePage(1));
+        dispatch(findActions.trigger(false));
     }, []);
 
     const addGenresToList = (genres: IMovieInit) => {
         const {id, name} = genres;
-        const alreadyIs = addGenres.find(value => value === id)
-        if (id !== alreadyIs) {
+        const alreadyIs = addGenres.find(value => value === id);
 
+        if (id !== alreadyIs) {
             setNameArr(prev => [...prev, (
                 <div key={id} className={'Genre_name'}>{name}</div>)
             ])
-
             dispatch(findActions.addGenresToList(id))
-
-            console.log(addGenres)
-
         }
     }
 
@@ -46,22 +42,20 @@ const GenreBadge: FC = () => {
         const buttons = [];
         const countGenres = genres.length;
 
-        if (countGenres) {
-            for (let i = 0; i < countGenres; i++) {
-                const {name} = genres[i];
-                buttons.push(<button
-                    key={i}
-                    className={'genre-btn'}
-                    onClick={() => addGenresToList(genres[i])}
-                >{name}</button>)
-            }
+        for (let i = 0; i < countGenres; i++) {
+            const {name} = genres[i];
+            buttons.push(<button
+                key={i}
+                className={'genre-btn'}
+                onClick={() => addGenresToList(genres[i])}
+            >{name}</button>)
         }
         return buttons;
     };
 
     const cancelGenreList = () => {
         dispatch(findActions.delGenres())
-        setNameArr(prev => [])
+        setNameArr([])
     };
 
     return (

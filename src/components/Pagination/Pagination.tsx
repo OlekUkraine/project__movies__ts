@@ -5,11 +5,8 @@ import {DropDownList} from "../dropDownList";
 import {findActions} from "../../redux";
 import './Pagination.css';
 
-interface IProps {
 
-}
-
-const Pagination: FC<IProps> = () => {
+const Pagination: FC = () => {
     const theme = useAppSelector(state => state.themeReducer.value);
     const {total_page} = useAppSelector(state => state.movieReducer);
     const {addGenres, page} = useAppSelector(state => state.findMoviesReducer);

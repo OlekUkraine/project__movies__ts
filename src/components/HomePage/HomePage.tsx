@@ -2,17 +2,18 @@ import {FC, useEffect} from 'react';
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {MoviesListCard} from "../MoviesListCard";
-import {movieActions} from "../../redux";
+import {findActions, movieActions} from "../../redux";
 import './HomePage.css';
 
 
 const HomePage: FC = () => {
     const theme = useAppSelector(state => state.themeReducer.value);
-    const {movies} = useAppSelector(state => state.movieReducer)
+    const {movies} = useAppSelector(state => state.movieReducer);
     const dispatch = useAppDispatch();
 
     useEffect(()=>{
-        dispatch(movieActions.getTopRated())
+        dispatch(movieActions.getTopRated());
+        dispatch(findActions.trigger(false));
     }, [])
 
 
@@ -22,7 +23,7 @@ const HomePage: FC = () => {
             <div className={'top-rating'}>
 
                 {
-                    movies.map((movie, index) => {
+                    movies.map((movie) => {
                         return <MoviesListCard key={movie.id} movie={movie}/>
                     }).splice(0, 5)
                 }

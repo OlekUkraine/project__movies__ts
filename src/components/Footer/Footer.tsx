@@ -4,11 +4,7 @@ import {useAppSelector} from "../../hooks";
 import './Footer.css';
 
 
-interface IProps {
-
-}
-
-const Footer: FC<IProps> = () => {
+const Footer: FC = () => {
     const theme = useAppSelector(state => state.themeReducer.value);
     return (
         <div className={`Footer ${theme}`}>

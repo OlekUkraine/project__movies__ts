@@ -4,11 +4,8 @@ import avatar from "../../images/avatar/ava.jpg";
 import {useAppSelector} from "../../hooks";
 import './UserInfo.css';
 
-interface IProps {
-    
-}
 
-const UserInfo: FC<IProps> = () => {
+const UserInfo: FC = () => {
     const theme = useAppSelector(state => state.themeReducer.value);
     return (
         <div className={`UserInfo ${theme}`}>
