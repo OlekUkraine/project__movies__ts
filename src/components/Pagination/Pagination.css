@@ -4,6 +4,11 @@
     justify-content: space-evenly;
     align-content: center;
     align-items: center;
+
+    opacity: 0;
+
+    animation: pagination 1.5s ease-out forwards;
+    animation-delay: .5s;
 }
 
 .Pagination {
@@ -90,10 +95,36 @@
     margin: 10px;
     padding: 5px 15px;
 
+    cursor: pointer;
+
     color: var(--primary-text-color);
-    box-shadow:  2px 2px 3px var(--primary-shadow-color);
+    box-shadow:  0 -2px 3px var(--primary-shadow-color);
 
     border-radius: 5px;
+
+    animation: pulse-button 10s ease-out infinite;
+    animation-delay: 3s;
+
+    transition: .4s;
+}
+
+.genres-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:  0 -1px 3px var(--primary-shadow-color);
+}
+
+.genres-btn:active {
+    transform: scale(98%);
+
+    box-shadow:  0 1px 3px var(--primary-shadow-color);
+}
+
+.stopgap {
+    margin: 10px;
+    padding: 5px 15px;
+
+    opacity: 0;
 }
 
 .none-num {
@@ -109,5 +140,32 @@
 
     border:none;
     border-radius: 5px;
+}
+
+@keyframes pagination {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse-button {
+    0% {
+        box-shadow:  0 -2px 3px var(--primary-shadow-color);
+    }
+    25% {
+        box-shadow:  0 0 5px var(--primary-shadow-color);
+    }
+    50% {
+        box-shadow:  0 2px 3px var(--primary-shadow-color);
+    }
+    75% {
+        box-shadow:  0 0 5px var(--primary-shadow-color);
+    }
+    100% {
+        box-shadow:  0 -2px 3px var(--primary-shadow-color);
+    }
 }
 

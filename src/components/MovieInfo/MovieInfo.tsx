@@ -7,21 +7,21 @@ import {StarsRating} from "../StarsRating";
 import {IMovie} from "../../interfaces";
 import './MovieInfo.css';
 
-interface IProps {
-    
-}
 
-const MovieInfo: FC<IProps> = () => {
+const MovieInfo: FC = () => {
     const theme = useAppSelector(state => state.themeReducer.value);
     const {state: movie} = useAppLocation<IMovie>();
     const {title, overview, vote_average, genre_ids} = movie;
     const navigate = useNavigate();
     const handleBackClick = () => {
-        navigate('/movies');
+        navigate('../');
     };
 
+    console.log(genre_ids)
+
+
     return (
-        <div className={`MovieInfo ${theme}`}>
+        <div key={movie.id} className={`MovieInfo ${theme}`}>
             <div className={'MovieInfo__all-info'}>
 
                 <div className={'all-info__left-block'}>
@@ -40,7 +40,7 @@ const MovieInfo: FC<IProps> = () => {
                     </div>
 
                     <div className={'all-info__genres'}>
-                        {genre_ids.map(genre => <div className={'genre'}>genre_{genre}</div>)}
+                        {/*{genre_ids.map(genre => <div key={genre} className={'genre'}>genre_{genre}</div>)}*/}
                     </div>
 
                     <div className={'all-info__description'}>

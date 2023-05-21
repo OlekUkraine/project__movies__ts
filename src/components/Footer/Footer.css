@@ -18,25 +18,26 @@
 }
 
 .Footer div {
+    margin-left: -40%;
+
     font-size: 16px;
 
-    animation: heart ease-out 1s infinite;
+    animation: heart ease 10s infinite;
 }
-
-
-@keyframes heart {
-    0% {
-        font-size: 16px;
-    }
-    30% {
-        font-size: 22px;
-    }
-    100% {
-        font-size: 16px;
-    }
-}
-
 
 .Footer div {
     font-size: 16px;
 }
+
+@keyframes heart {
+    0% {
+        margin-left: -40%;
+    }
+    50% {
+        margin-left: 40%;
+    }
+    100% {
+        margin-left: -40%;
+    }
+}
+

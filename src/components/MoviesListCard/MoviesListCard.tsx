@@ -15,16 +15,14 @@ interface IProps {
 const MoviesListCard: FC<IProps> = ({movie}) => {
     const theme = useAppSelector(state => state.themeReducer.value);
     const {id, title, vote_average} = movie;
-
     const navigate = useNavigate();
 
     const handleCardClick = () => {
-        navigate(`info/${id.toString()}`, { state: { ...movie } });
+        navigate(`/movies/info/${id.toString()}`, { state: { ...movie } });
     };
 
-
     return (
-        <div className={`MoviesListCard ${theme}`} onClick={handleCardClick}>
+        <div className={`MoviesListCard ${theme}`} onClick={()=>handleCardClick()}>
                 <PosterPreview movie={movie}/>
                 <div>
                     <StarsRating vote_average={vote_average}/>

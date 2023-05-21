@@ -6,15 +6,16 @@ interface ITheme {
 }
 
 const initialState: ITheme = {
-    value: 'light'
+    value: null
 }
 
 const slice = createSlice({
     name:'themeSlice',
     initialState,
     reducers: {
-        toggleTheme: state => {
-            state.value = state.value === 'light'? 'dark': 'light';
+        toggleTheme: (state, action) => {
+            // state.value = state.value === 'light'? 'dark': 'light';
+            state.value = action.payload;
         }
     }
 })

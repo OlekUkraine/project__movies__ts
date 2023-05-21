@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
-import {useSearchParams} from 'react-router-dom';
 
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import {DropDownList} from "../dropDownList";
-import {useAppSelector} from '../../hooks';
+import {findActions} from "../../redux";
 import './Pagination.css';
 
 interface IProps {
@@ -12,12 +12,14 @@ interface IProps {
 const Pagination: FC<IProps> = () => {
     const theme = useAppSelector(state => state.themeReducer.value);
     const {total_page} = useAppSelector(state => state.movieReducer);
-    const [query, setQuery] = useSearchParams();
-    const thisPageNumber: number = +(query.get('page')) || 1;
+    const {addGenres, page} = useAppSelector(state => state.findMoviesReducer);
+    const dispatch = useAppDispatch();
+
+    const thisPageNumber: number = page || 1;
     const totalPage: number = total_page > 500 ? 500 : total_page;
 
     const goToPage = (pageNumber: number) => {
-        setQuery(prev => ({...prev, page: pageNumber}));
+        dispatch(findActions.togglePage(pageNumber));
     };
 
     const renderPageButtons = () => {
@@ -96,23 +98,22 @@ const Pagination: FC<IProps> = () => {
         return buttons;
     };
 
-
+    const resetGenresAndPage = () => {
+        dispatch(findActions.delGenres());
+        dispatch(findActions.togglePage(1));
+    };
 
     return (
         <div className={'Pagination__wrap'}>
-            <div className={'genres-btn'}>genres</div>
+            <div className={`${!!!addGenres.length ? 'stopgap' : 'genres-btn'}`}
+                 onClick={() => resetGenresAndPage()}>Reset genres
+            </div>
             <div className={`Pagination ${theme}`}>{renderPageButtons()}</div>
             <DropDownList/>
         </div>
     );
 };
 
-export {Pagination};
-
-
-// <select value={selectedOption} onChange={handleSelectChange}>
-//     <option value="popularity.asc">popularity.asc</option>
-//     <option value="popularity.desc">popularity.desc</option>
-//     <option value="revenue.asc">revenue.asc</option>
-//     <option value="revenue.desc">revenue.desc</option>
-// </select>
+export {
+    Pagination
+};

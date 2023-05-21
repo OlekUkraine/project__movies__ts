@@ -1,6 +1,6 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 
-import {useAppDispatch, useAppSelector} from "../../hooks";
+import {useAppDispatch} from "../../hooks";
 import {themeActions} from "../../redux";
 import './ToggleTheme.css';
 
@@ -10,16 +10,25 @@ interface IProps {
 }
 
 const ToggleTheme: FC<IProps> = () => {
-    const theme = useAppSelector(state => state.themeReducer.value);
+    const [theme, setTheme] = useState<string>(localStorage.getItem('theme') || 'light');
     const dispatch = useAppDispatch();
+    // const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // const defaultTheme = isDarkMode? 'dark': 'light';
+    // console.log(defaultTheme);
+
+
+    useEffect(() => {
+            dispatch(themeActions.toggleTheme(theme));
+            localStorage.setItem('theme', theme);
+    }, [dispatch, theme]);
 
     const handleToggleTheme = () => {
-        dispatch(themeActions.toggleTheme());
+        setTheme(prev => prev === 'light'? 'dark': 'light')
     };
 
     return (
         <div className={`ToggleTheme ${theme}`}>
-            <div className={'ToggleTheme-btn'} onClick={handleToggleTheme}>{theme}</div>
+            <div className={'ToggleTheme-btn'} onClick={()=>handleToggleTheme()}>{theme}</div>
         </div>
     );
 };

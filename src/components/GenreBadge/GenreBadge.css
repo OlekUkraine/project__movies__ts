@@ -1,19 +1,101 @@
 
 .GenreBadge {
-    width: 100%;
+    width: 80%;
     height: 0;
+    padding: 15px;
+
+    display: flex;
 
     overflow: hidden;
 
     background-color: var(--primary-bg-color);
 
-    animation: genre-page 2s ease-out forwards;
-    animation-delay: .8s;
+    animation: genre-page 1s ease-out forwards;
+    animation-delay: .2s;
 }
+
+.GenreBadge__buttons {
+    width: 30%;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.onBtn {
+    width: 80px;
+    height: 40px;
+    margin-top: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+
+    cursor: pointer;
+
+    color: var(--primary-text-color);
+    background-color: var(--primary-bg-color);
+    box-shadow: 0 -3px 4px var(--primary-shadow-color);
+
+    border: none;
+    border-radius: 5px;
+}
+
+.offBtn {
+    display: none;
+}
+
+.onBtn:hover,
+.GenreBadge__buttons>button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 -1px 4px var(--primary-shadow-color);
+}
+
+.GenreBadge__buttons>button {
+    width: 100px;
+    height: 40px;
+
+    color: var(--primary-text-color);
+    background-color: var(--primary-bg-color);
+    box-shadow: 0 -3px 4px var(--primary-shadow-color);
+
+    border: none;
+    border-radius: 5px;
+}
+
+
+.onBtn:active,
+.GenreBadge__buttons>button:active {
+    transform: scale(98%);
+
+    box-shadow: 0 2px 4px var(--primary-shadow-color);
+}
+
+.GenreBadge__add {
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.Genre_name {
+    width: 300px;
+    padding: 10px;
+
+    text-align: center;
+
+    color: var(--primary-text-color);
+    background-color: var(--primary-bg-color);
+    box-shadow: 0 -3px 4px var(--primary-shadow-color);
+}
+
 
 @keyframes genre-page {
     0%{
-        height: 1vh;
+        height: 0;
     }
     100%{
         height: 75vh;

@@ -1,41 +1,53 @@
 import React, {FC} from 'react';
 import {SubmitHandler, useForm} from "react-hook-form";
-import {NavLink, useSearchParams} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import logo from '../../images/logo/logo.jpg';
 import {ToggleTheme} from "../ToggleTheme";
-import {useAppSelector} from "../../hooks";
+import {findActions} from "../../redux";
 import {IFormData} from "../../types";
 import './Header.css';
+import {UserInfo} from "../UserInfo";
 
 
-interface IProps {
-
-}
-
-const Header: FC<IProps> = () => {
+const Header: FC = () => {
     const theme = useAppSelector(state => state.themeReducer.value);
-    const {register, handleSubmit, formState:{isValid}, } = useForm<IFormData>({mode:'all'});
-    const [, setQuery] = useSearchParams();
+    const {register, handleSubmit, reset, formState: {isValid}} = useForm<IFormData>({mode: 'all'});
+    const dispatch = useAppDispatch()
 
-    const findMovies:SubmitHandler<IFormData> = ({title}) => {
-        setQuery(prev2 => ({...prev2, query: title}))
+    const findMovies: SubmitHandler<IFormData> = ({title}) => {
+        if (title === '') {
+            dispatch(findActions.delName());
+        }
+        dispatch(findActions.delGenres());
+        dispatch(findActions.addName(title));
+        reset()
     };
 
+    const resetPageAndGenre = () => {
+        dispatch(findActions.togglePage(1));
+        dispatch(findActions.delGenres());
+        dispatch(findActions.delName());
+        reset();
+    };
 
     return (
         <div className={`Header ${theme}`}>
 
-            <div>
+            <div className={'Header__left-bar'}>
                 <div className={'Header__info'}>
                     <div className={'Header__logo'}>
-                        <NavLink to={'home'}>Logo</NavLink>
+                        <NavLink to={'home'}>
+                            <img className={'logo'} src={logo} alt="logo"/>
+                        </NavLink>
                     </div>
-                    <div className={'Header__title'}>Header title</div>
+                    <div className={'Header__title'}>follow me</div>
                 </div>
 
                 <div className={'Header__nav'}>
-                    <NavLink to={'/movies/genres'}>Discover</NavLink>
-                    <NavLink to={'/movies'}>Movies</NavLink>
+                    <NavLink to={'/movies/genres'}>Genres</NavLink>
+                    <NavLink onClick={() => resetPageAndGenre()} to={'movies'}>Movies</NavLink>
                 </div>
             </div>
 
@@ -49,8 +61,7 @@ const Header: FC<IProps> = () => {
             </div>
 
             <div className={'Header__user'}>
-                <div className={'Header__user-avatar'}>Avatar</div>
-                <div className={'Header__user-name'}>User name</div>
+                <UserInfo/>
             </div>
 
         </div>

@@ -9,12 +9,25 @@
 }
 
 .MoviesList__list {
-    /*width: calc(100% - 30px);*/
-
     display: flex;
     flex: 10;
     flex-wrap: wrap;
-    /*justify-content: center;*/
 
     box-sizing: border-box;
+}
+
+.no-movies {
+    width: 100%;
+    height: 100vh;
+    margin-top: -200px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-transform: uppercase;
+
+    color: var(--primary-text-color);
+    text-shadow: 0 2px 4px var(--primary-shadow-color);
 }

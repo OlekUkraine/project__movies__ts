@@ -23,6 +23,11 @@ a {
     border-radius: 9px;
 
     animation: fade-in .5s ease-in-out forwards;
+    transition: rotateZ .1s;
+}
+
+.MoviesListCard:hover {
+    transform: rotateZ(1deg);
 }
 
 .MoviesListCard>a {

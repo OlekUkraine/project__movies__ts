@@ -1,19 +1,19 @@
 import {FC} from 'react';
 
 import {posterService} from "../../services";
+import {notPicture} from "../../constants";
 import {IMovie} from "../../interfaces";
 
 interface IProps {
-    movie: IMovie
+    movie: IMovie;
 }
 
 const PosterPreview: FC<IProps> = ({movie}) => {
     const {title, poster_path} = movie;
     const picture = posterService.getImageUrl(300, poster_path);
-    const notPic = 'https://gdr.one/simg/300/400';
 
     return (
-        <img src={poster_path? picture: notPic} alt={title}/>
+        <img src={poster_path? picture: notPicture} alt={title}/>
     );
 };
 

@@ -4,9 +4,25 @@
     height: 100vh;
 
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
 
     background-color: var(--primary-bg-color);
+}
+
+.HomePage h1 {
+    color: var(--primary-text-color);
+}
+
+.top-rating {
+    width: 100%;
+    padding: 15px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    overflow: hidden;
 }
 

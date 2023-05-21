@@ -1,32 +1,83 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
+import {useNavigate} from "react-router-dom";
 
-import {useAppSelector} from "../../hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {genreActions, findActions} from "../../redux";
+import {IMovieInit} from "../../types";
 import './GenreBadge.css';
 
-interface IProps {
-    
-}
 
-const GenreBadge: FC<IProps> = () => {
+const GenreBadge: FC = () => {
     const theme = useAppSelector(state => state.themeReducer.value);
+    const [nameArr, setNameArr] = useState<JSX.Element[]>([])
+    const {genres} = useAppSelector(state => state.genreReducer);
+    const {addGenres} = useAppSelector(state => state.findMoviesReducer);
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
+    const handleLMoviesListClick = () => {
+        navigate(`/movies`);
+    };
+
+    useEffect(() => {
+        dispatch(genreActions.getAll());
+        dispatch(findActions.delGenres());
+        dispatch(findActions.delName());
+        dispatch(findActions.togglePage(1));
+    }, []);
+
+    const addGenresToList = (genres: IMovieInit) => {
+        const {id, name} = genres;
+        const alreadyIs = addGenres.find(value => value === id)
+        if (id !== alreadyIs) {
+
+            setNameArr(prev => [...prev, (
+                <div key={id} className={'Genre_name'}>{name}</div>)
+            ])
+
+            dispatch(findActions.addGenresToList(id))
+
+            console.log(addGenres)
+
+        }
+    }
+
+    const renderGenreButtons = () => {
+        const buttons = [];
+        const countGenres = genres.length;
+
+        if (countGenres) {
+            for (let i = 0; i < countGenres; i++) {
+                const {name} = genres[i];
+                buttons.push(<button
+                    key={i}
+                    className={'genre-btn'}
+                    onClick={() => addGenresToList(genres[i])}
+                >{name}</button>)
+            }
+        }
+        return buttons;
+    };
+
+    const cancelGenreList = () => {
+        dispatch(findActions.delGenres())
+        setNameArr(prev => [])
+    };
+
     return (
         <div className={`GenreBadge ${theme}`}>
-            <p>GenreBadge</p>
-            <p>GenreBadge</p>
-            <p>GenreBadge</p>
-            <p>GenreBadge</p>
-            <p>GenreBadge</p>
-            <p>GenreBadge</p>
-            <p>GenreBadge</p>
-            <p>GenreBadge</p>
-            <p>GenreBadge</p>
-            <p>GenreBadge</p>
-            <p>GenreBadge</p>
-            <p>GenreBadge</p>
-            <p>GenreBadge</p>
-            <p>GenreBadge</p>
-            <p>GenreBadge</p>
-
+            <div className={'GenreBadge__buttons'}>
+                {renderGenreButtons()}
+            </div>
+            <div className={'GenreBadge__add'}>
+                {nameArr.length > 0 && nameArr}
+            </div>
+            <div className={`${addGenres.length ? 'onBtn' : 'offBtn'}`} onClick={() => handleLMoviesListClick()}>
+                FIND
+            </div>
+            <div className={`${addGenres.length ? 'onBtn' : 'offBtn'}`}
+                 onClick={() => cancelGenreList()}>cancel
+            </div>
         </div>
     );
 };

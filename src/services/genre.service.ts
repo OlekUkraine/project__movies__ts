@@ -1,12 +1,16 @@
-import {IRes} from "../types";
-import {IMovie, IPagination} from "../interfaces";
+import {IGenre, IMovie, IPagination} from "../interfaces";
 import {axiosMovieService} from "./axios.service";
 import {urls} from "../constants";
+import {IRes} from "../types";
+import {IMovieInit} from "../types";
 
-const genreService = {
-    getGenres:(name:string):IRes<IPagination<IMovie>> => axiosMovieService.get(urls.genre, {params: name}),
+class GenreService {
+    getAllGenres():IRes<IGenre<IMovieInit>> {
+        return axiosMovieService.get(urls.genre)
+    }
+    getGenres(name: string): IRes<IPagination<IMovie>> {
+        return axiosMovieService.get(urls.genre, {params: name});
+    }
 }
 
-export {
-    genreService
-}
+export const genreService = new GenreService();

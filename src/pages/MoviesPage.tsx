@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Outlet, Route, Routes} from "react-router-dom";
 
-import {GenreBadge, MovieInfo, MoviesList} from "../components";
+import {GenreBadge, MovieInfo, MoviesList, Pagination} from "../components";
 import {useAppSelector} from "../hooks";
 import './MoviesPage.css';
 
@@ -19,8 +19,10 @@ const MoviesPage: FC<IProps> = () => {
             <Routes>
                 <Route path="/" element={
                         <>
+                            <Pagination/>
                             <MoviesList/>
                             <Outlet />
+                            <Pagination/>
                         </>
                     }/>
                 <Route path="info/:id" element={<MovieInfo />} />

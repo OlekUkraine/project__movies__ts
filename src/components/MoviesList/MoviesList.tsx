@@ -1,53 +1,51 @@
 import React, {FC, useEffect} from 'react';
-import {useSearchParams} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
+import {movieActions, findActions} from "../../redux";
 import {MoviesListCard} from "../MoviesListCard";
-import {Pagination} from "../Pagination";
-import {movieActions} from "../../redux";
 import './MoviesList.css';
 
 
-interface IProps {
 
-}
-
-const MoviesList: FC<IProps> = () => {
+const MoviesList: FC = () => {
     const theme = useAppSelector(state => state.themeReducer.value);
-    const {movies, movie_result} = useAppSelector(state => state.movieReducer);
+    const {movies, total_results} = useAppSelector(state => state.movieReducer);
+    const {addGenres, page: thisPage, addNameMovies: title} = useAppSelector(state => state.findMoviesReducer);
     const dispatch = useAppDispatch();
-    const [query, setQuery] = useSearchParams();
 
     useEffect(() => {
-        setQuery(prev => ({...prev, page: '1'}))
+        dispatch(findActions.togglePage(1));
     }, [])
 
-    console.log(movie_result);
+
 
     useEffect(() => {
-        const page = +query.get('page') || 1;
-        const title = query.get('query');
+        const page = thisPage || 1;
 
-        if (title) {
-            dispatch(movieActions.searchMovies({query: title, page}));
-        } else {
+        if (addGenres.length > 0) {
+            dispatch(movieActions.getByGenres({genreId: addGenres.join(), page}))
+        }
+
+        if (addGenres.length <= 0 && title === null) {
             dispatch(movieActions.getMovies(page))
         }
-    }, [dispatch, query])
+
+        if (addGenres.length <= 0 && title !== null) {
+            dispatch(movieActions.searchMovies({query: title, page}));
+        }
+    }, [dispatch, thisPage, title, addGenres])
 
 
     return (
         <div className={`MoviesList ${theme}`}>
-            {/*<div className={'MoviesList__genre'}>*/}
-            {/*    */}
-            {/*</div>*/}
-
             <div className={'MoviesList__list'}>
-                <Pagination/>
-                {
-                    movies.map(movie => <MoviesListCard key={movie.id} movie={movie}/>)
+                {!!total_results?
+                    movies.map(movie => <MoviesListCard key={movie.id} movie={movie}/>):
+                    <div className={'no-movies'}>
+                        <h1>There are no movies</h1>
+                        <h1>for your request</h1>
+                    </div>
                 }
-                <Pagination/>
             </div>
 
         </div>

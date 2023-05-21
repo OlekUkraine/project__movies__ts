@@ -2,10 +2,10 @@ import {createAsyncThunk, createSlice, isFulfilled, isRejectedWithValue} from "@
 import {AxiosError} from "axios";
 
 import {IMovie, IPagination} from "../../interfaces";
-import {IError} from "../../interfaces";
 import {movieService} from "../../services";
+import {IGetById} from "../../interfaces";
+import {IError} from "../../interfaces";
 import {ISearch} from "../../types";
-import {IGetById} from "../../interfaces/getById.interface";
 
 
 interface IState {
@@ -26,7 +26,7 @@ const initialState: IState = {
     total_results: null,
     movie_result: [],
     error: null,
-    trigger: true,
+    trigger: false,
     sort_by: null
 };
 
@@ -57,11 +57,37 @@ const searchMovies = createAsyncThunk<IPagination<IMovie>, ISearch>(
     }
 )
 
+const getByGenres = createAsyncThunk<IPagination<IMovie>, ISearch>(
+    'movieSlice/getByGenres',
+    async ({genreId, page}, {rejectWithValue}) => {
+        try {
+            const {data} = await movieService.getByGenres(genreId, page)
+            return data;
+        } catch (e) {
+            const err = e as AxiosError;
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
+
 const getByIdMovie = createAsyncThunk<IGetById<IMovie>, number>(
     'movieSlice/getByIdMovie',
     async (id, {rejectWithValue}) => {
         try {
-            const {data} = await movieService.getById(id);
+            const {data} = await movieService.getById(id.toString());
+            return data;
+        } catch (e) {
+            const err = e as AxiosError;
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
+
+const getTopRated = createAsyncThunk<IPagination<IMovie>, void>(
+    'movieSlice/getTopRated',
+    async (_,{rejectWithValue}) => {
+        try{
+            const {data} = await movieService.getTopRatedMovies();
             return data;
         } catch (e) {
             const err = e as AxiosError;
@@ -76,24 +102,16 @@ const slice = createSlice({
     reducers: {},
     extraReducers: builder =>
         builder
-            .addCase(getMovies.fulfilled, (state, action) => {
-                const {page, total_pages, results, total_results} = action.payload;
-                state.movies = results;
-                state.page = page;
-                state.total_page = total_pages;
-                state.total_results = total_results;
-            })
-            .addCase(searchMovies.fulfilled, (state, action) => {
-                const {page, total_pages, results, total_results} = action.payload;
-                state.movies = results;
-                state.page = page;
-                state.total_page = total_pages;
-                state.total_results = total_results;
-                // state.trigger = false;
-            })
             .addCase(getByIdMovie.fulfilled, (state, action)=>{
                 const {movie_results} = action.payload;
                 state.movie_result = movie_results;
+            })
+            .addMatcher(isFulfilled(getMovies, searchMovies, getByGenres,getTopRated), (state, action)=>{
+                const {page, total_pages, results, total_results} = action.payload;
+                state.movies = results;
+                state.page = page;
+                state.total_page = total_pages;
+                state.total_results = total_results;
             })
             .addMatcher(isFulfilled(), state => {
                 state.error = null;
@@ -109,7 +127,9 @@ const movieActions = {
     ...actions,
     getMovies,
     searchMovies,
-    getByIdMovie
+    getByIdMovie,
+    getByGenres,
+    getTopRated
 }
 
 export {
