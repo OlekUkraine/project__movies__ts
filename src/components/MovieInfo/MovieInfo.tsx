@@ -40,7 +40,7 @@ const MovieInfo: FC = () => {
                     </div>
 
                     <div className={'all-info__genres'}>
-                        {/*{genre_ids.map(genre => <div key={genre} className={'genre'}>genre_{genre}</div>)}*/}
+                        {genre_ids.map(genre => <div key={genre} className={'genre'}>genre_{genre}</div>)}
                     </div>
 
                     <div className={'all-info__description'}>
